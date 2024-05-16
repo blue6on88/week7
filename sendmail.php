@@ -10,6 +10,11 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
+$subject = $_POST["subject"];
+$content = $_POST["content"];
+$content.="<br/>";
+$content.=nl2br($content);
+
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
@@ -20,7 +25,7 @@ try {
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'a45629751@gmail.com';                     //SMTP username
-    $mail->Password   = 'ifug rpiz cbsa yyyy';                               //SMTP password 假的
+    $mail->Password   = 'ifug rpiz cccc yyyy';                               //SMTP password 假的
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     $mail->CharSet='utf-8';
@@ -47,8 +52,8 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = "測試中";
-    $mail->Body    = "測試測試";
+    $mail->Subject = $subject;
+    $mail->Body    = $content;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
